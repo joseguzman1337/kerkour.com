@@ -23,37 +23,26 @@ yarn-error.log*
 .sourcemaps/
 .sass-cache/
 node_modules/
-
 # Miscellaneous
 *.class
-*.log
 *.pyc
 *.swp
-.DS_Store
 .atom/
 .buildlog/
 .history
 .svn/
-
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
-.idea/
-
-
 # rust
 target
 *.rs.bk
-
 # local env files
 .env.local
 .env.*.local
-
-
 # project files
 !bloom/vendor/**
-
 # configuration file
 bloom.json
 # certificats directory
@@ -63,5 +52,6 @@ bloom.json
 .env*
 stripe.json
 /public/
-
 shellcode.bin
+# macOS system files
+._*
