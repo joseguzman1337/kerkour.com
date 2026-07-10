@@ -12,10 +12,12 @@ import (
 	"github.com/google/uuid"
 )
 
+// Server holds the HTTP handlers and their dependencies.
 type Server struct {
 	chatService *ChatService
 }
 
+// CreateMessage is the request payload for creating a message.
 type CreateMessage struct {
 	Body string `json:"body"`
 }
@@ -37,6 +39,7 @@ func main() {
 	http.ListenAndServe(":8080", r)
 }
 
+// FindMessagesHandler long-polls for messages created after the given UUID.
 func (server *Server) FindMessagesHandler(w http.ResponseWriter, req *http.Request) {
 	after := req.URL.Query().Get("after")
 	if after == "" {
@@ -69,6 +72,7 @@ func (server *Server) FindMessagesHandler(w http.ResponseWriter, req *http.Reque
 	httpOk(w, messages)
 }
 
+// CreateMessageHandler creates a new chat message from the request body.
 func (server *Server) CreateMessageHandler(w http.ResponseWriter, req *http.Request) {
 	var input CreateMessage
 

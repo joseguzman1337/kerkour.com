@@ -7,17 +7,20 @@ import (
 	"github.com/google/uuid"
 )
 
+// Message is a single chat message.
 type Message struct {
 	ID       uuid.UUID `json:"id"`
 	CreateAt time.Time `json:"created_at"`
 	Body     string    `json:"body"`
 }
 
+// ChatService stores chat messages in memory.
 type ChatService struct {
 	mutex    sync.RWMutex
 	messages map[uuid.UUID]Message
 }
 
+// CreateMessage stores a new message and returns it.
 func (service *ChatService) CreateMessage(body string) (Message, error) {
 	message := Message{
 		ID:       uuid.New(),
@@ -37,6 +40,7 @@ func (service *ChatService) CreateMessage(body string) (Message, error) {
 	return message, nil
 }
 
+// FindMessages returns messages created after the given UUID.
 func (service *ChatService) FindMessages(after *uuid.UUID) ([]Message, error) {
 	if after == nil {
 		after = &uuid.UUID{} // create a zero UUID
